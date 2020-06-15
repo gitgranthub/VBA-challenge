@@ -1,6 +1,6 @@
 'Problem:'
 'Create a loop that scans through a years worth of stocks'
-'***** MODIFY THIS SCRIPT TP GO THROUGH ALL YEARS (SHEETS) *****
+'***** MODIFY? THIS SCRIPT TO GO THROUGH ALL YEARS (SHEETS) *****
 
 
 Sub StockTickerScanCompare()
@@ -32,11 +32,14 @@ Sub StockTickerScanCompare()
         ' Add to the Stock Total
         Stock_Total = Stock_Total + Cells(i, 3).Value
 
+        ' Add the name Ticker to the Column Header for "I"
+        Cells(1, 9).Value = "Ticker"
+
         ' Print the Stock Name in the Summary Table
         Range("I" & Summary_Table_Row).Value = Stock_Name
 
         ' Print the Stock Name amount to the Summary Table
-        Range("K" & Summary_Table_Row).Value = Yr_Yr_stock_vol_Total
+        Range("L" & Summary_Table_Row).Value = Yr_Yr_stock_vol_Total
 
         ' Add one to the summary table row
         Summary_Table_Row = Summary_Table_Row + 1
@@ -53,5 +56,22 @@ Sub StockTickerScanCompare()
     End If
 
   Next i
+
+  '** Color change values based on Positvive or Negative Growth**
+
+  'Sample color change scripts. *** ADD conditionals based on positve of negative
+  'change'
+
+  ' Set the Font color to Red
+  Range("A1").Font.ColorIndex = 3
+
+  ' Set the Cell Colors to Red
+  Range("A2:A5").Interior.ColorIndex = 3
+
+  ' Set the Font Color to Green
+  Range("B1").Font.ColorIndex = 4
+
+  ' Set the Cell Colors to Green
+  Range("B2:B5").Interior.ColorIndex = 4
 
 End Sub
