@@ -63,15 +63,15 @@ Sub StockTickerScanCompare()
   'change'
 
   ' Set the Font color to Red
-  Range("A1").Font.ColorIndex = 3
+  'Range("A1").Font.ColorIndex = 3
 
   ' Set the Cell Colors to Red
-  Range("A2:A5").Interior.ColorIndex = 3
+  'Range("A2:A5").Interior.ColorIndex = 3
 
   ' Set the Font Color to Green
-  Range("B1").Font.ColorIndex = 4
+  'Range("B1").Font.ColorIndex = 4
 
   ' Set the Cell Colors to Green
-  Range("B2:B5").Interior.ColorIndex = 4
+  'Range("B2:B5").Interior.ColorIndex = 4
 
 End Sub
