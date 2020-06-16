@@ -7,12 +7,6 @@ Sub StockTickerScanCompareREV7()
 
     'set current Worksheet as ws 
      Dim ws As Worksheet
-
-     ' Set initial row count for the current worksheet
-    Dim Lastrow As Long
-    Dim i As Long
-        
-    Lastrow = ws.Cells(Rows.Count, 1).End(xlUp).Row
      
      
      '***USE IF ' Loop through all of the worksheets in the active workbook. **cite Ibaloyan**
@@ -44,10 +38,7 @@ Sub StockTickerScanCompareREV7()
         Dim Delta_Percent As Double
         Delta_Percent = 0
         
-        ' Set initial row count for the current worksheet
-        Dim Lastrow As Long
-        Dim i As Long
-        Lastrow = ws.Cells(Rows.Count, 1).End(xlUp).Row
+     
 
  'Create an Array to hold the tickers found in a loop pass, to find the First/Last entry'**TESTING
  'Dim TickerFirstLastArray() As Single
@@ -79,6 +70,12 @@ Sub StockTickerScanCompareREV7()
     ' Set initial value of Open Price for the first Ticker of CurrentWs,
         ' The rest ticker's open price will be initialized within the for loop below
         Open_Price = ws.Cells(2, 3).Value
+
+    ' Set initial row count for the current worksheet
+    Dim Lastrow As Long
+    Dim i As Long
+        
+    Lastrow = ws.Cells(Rows.Count, 1).End(xlUp).Row
 
     ' Loop through all stocks
     For i = 2 To Lastrow

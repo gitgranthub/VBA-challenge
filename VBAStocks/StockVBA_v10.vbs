@@ -5,14 +5,9 @@
 
 Sub StockTickerScanCompareREV7()
 
+'****NOTE removed ws as...... for this script******
     'set current Worksheet as ws 
-     Dim ws As Worksheet
-
-     ' Set initial row count for the current worksheet
-    Dim Lastrow As Long
-    Dim i As Long
-        
-    Lastrow = ws.Cells(Rows.Count, 1).End(xlUp).Row
+     'Dim ws As Worksheet
      
      
      '***USE IF ' Loop through all of the worksheets in the active workbook. **cite Ibaloyan**
@@ -44,10 +39,7 @@ Sub StockTickerScanCompareREV7()
         Dim Delta_Percent As Double
         Delta_Percent = 0
         
-        ' Set initial row count for the current worksheet
-        Dim Lastrow As Long
-        Dim i As Long
-        Lastrow = ws.Cells(Rows.Count, 1).End(xlUp).Row
+     
 
  'Create an Array to hold the tickers found in a loop pass, to find the First/Last entry'**TESTING
  'Dim TickerFirstLastArray() As Single
@@ -58,16 +50,16 @@ Sub StockTickerScanCompareREV7()
 
 'Change COLUMN HEADER SECTION'
         ' Add the name Ticker to the Column Header for "I"
-        ws.Cells(1, 9).Value = "Ticker"
+        Cells(1, 9).Value = "Ticker"
         ' Add the name Year Change to the Column Header for "J"
-        ws.Cells(1, 10).Value = "Year Change"
+        Cells(1, 10).Value = "Year Change"
         ' Add the name Percent Change to the Column Header for "K"
-        ws.Cells(1, 11).Value = "Percent Change"
+        Cells(1, 11).Value = "Percent Change"
         ' Add the name Total Stock Volume to the Column Header for "L"
-        ws.Cells(1, 12).Value = "Total Stock Volume"
+        Cells(1, 12).Value = "Total Stock Volume"
 
     'AutoFit G-L Columns on Worksheet, I thought this may be a nice cleanup'
-    ws.Range("I1:L1").Columns.AutoFit
+    Range("I1:L1").Columns.AutoFit
 
     'Find unique Stock Ticker Year Price Change' TESTING*****
      'Set CompStock = Range(“A:A”).Find (What:=Range(“A2”).Value, LookIn:=xlValues, LookAt:= xlWhole)
@@ -78,20 +70,26 @@ Sub StockTickerScanCompareREV7()
 
     ' Set initial value of Open Price for the first Ticker of CurrentWs,
         ' The rest ticker's open price will be initialized within the for loop below
-        Open_Price = ws.Cells(2, 3).Value
+        Open_Price = Cells(2, 3).Value
+
+    ' Set initial row count for the current worksheet
+    Dim Lastrow As Long
+    Dim i As Long
+        
+    Lastrow = Cells(Rows.Count, 1).End(xlUp).Row
 
     ' Loop through all stocks
     For i = 2 To Lastrow
 
         ' Check if we are still within the same stock, if it is not...
         'If Cells(i + 1, 1).Value <> Cells(i, 1).Value Then
-        If ws.Cells(i + 1, 1).Value <> ws.Cells(i, 1).Value Then
+        If Cells(i + 1, 1).Value <> Cells(i, 1).Value Then
 
             ' Set the Stock name
-             Stock_Name = ws.Cells(i, 1).Value
+             Stock_Name = Cells(i, 1).Value
 
             ' Calculate Delta_Price and Delta_Percent
-            Close_Price = ws.Cells(i, 6).Value
+            Close_Price = Cells(i, 6).Value
             Delta_Price = Close_Price - Open_Price
             ' Check Division by 0 condition
             If Open_Price <> 0 Then
@@ -102,30 +100,30 @@ Sub StockTickerScanCompareREV7()
             End If
 
             'Add to the Stock Volume Total
-             Yr_Yr_stock_vol_Total = Yr_Yr_stock_vol_Total + ws.Cells(i, 7).Value
+             Yr_Yr_stock_vol_Total = Yr_Yr_stock_vol_Total + Cells(i, 7).Value
 
         ' Print the Stock Name in the Summary Table
-        ws.Range("I" & Summary_Table_Row).Value = Stock_Name
+        Range("I" & Summary_Table_Row).Value = Stock_Name
 
 
           ' Print the Ticker Name in the Summary Table, Column I **cite Ibaloyan**
-                ws.Range("J" & Summary_Table_Row).Value = Delta_Price
+                Range("J" & Summary_Table_Row).Value = Delta_Price
                 ' Fill "Yearly Change", i.e. Delta_Price with Green and Red colors
                 If (Delta_Price > 0) Then
                     'Fill column with GREEN color - good
-                    ws.Range("J" & Summary_Table_Row).Interior.ColorIndex = 4
+                    Range("J" & Summary_Table_Row).Interior.ColorIndex = 4
                 ElseIf (Delta_Price <= 0) Then
                     'Fill column with RED color - bad
-                    ws.Range("J" & Summary_Table_Row).Interior.ColorIndex = 3
+                    Range("J" & Summary_Table_Row).Interior.ColorIndex = 3
                 End If
                 
                  ' Print the Ticker Name in the Summary Table, Column I
-                ws.Range("K" & Summary_Table_Row).Value = (CStr(Delta_Percent) & "%")
+                Range("K" & Summary_Table_Row).Value = (CStr(Delta_Percent) & "%")
 
         
         
         ' Print the Stock Name amount to the Summary Table
-        ws.Range("L" & Summary_Table_Row).Value = Yr_Yr_stock_vol_Total
+        Range("L" & Summary_Table_Row).Value = Yr_Yr_stock_vol_Total
 
         ' Add one to the summary table row
         Summary_Table_Row = Summary_Table_Row + 1
@@ -137,7 +135,7 @@ Sub StockTickerScanCompareREV7()
     Else
 
         ' Add to the stock Total
-        Yr_Yr_stock_vol_Total = Yr_Yr_stock_vol_Total + ws.Cells(i, 7).Value
+        Yr_Yr_stock_vol_Total = Yr_Yr_stock_vol_Total + Cells(i, 7).Value
 
     End If
 
