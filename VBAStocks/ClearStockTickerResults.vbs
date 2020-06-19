@@ -13,11 +13,12 @@ Dim ws As Worksheet
                 ws.Range("K2:K" & Range("K2").End(xlDown).Row).Clear
                 ws.Range("L2:L" & Range("L2").End(xlDown).Row).Clear
                 
-                'I used these clear actions when I started trying the hard solve, but stopped.
-                'ws.Range("O1:O" & Range("O1").End(xlDown).Row).Clear
-                'ws.Range("O3:O" & Range("O3").End(xlDown).Row).Clear
-                'ws.Range("P1:P" & Range("P1").End(xlDown).Row).Clear
-                'ws.Range("Q1:Q" & Range("Q1").End(xlDown).Row).Clear
+                'I use this clear action when I added the hard solve.
+                ws.Range("O1:O" & Range("O1").End(xlDown).Row).Clear
+                ws.Range("O1:O" & Range("O1").End(xlDown).Row).Clear
+                ws.Range("O3:O" & Range("O3").End(xlDown).Row).Clear
+                ws.Range("P1:P" & Range("P1").End(xlDown).Row).Clear
+                ws.Range("Q1:Q" & Range("Q1").End(xlDown).Row).Clear
 
 
 
