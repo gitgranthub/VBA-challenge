@@ -13,4 +13,4 @@ It's actions. This project was tough for me and I couldn't have done it without 
 our in-class activites + office hours....
 
 I ran into a Run-Time Error 6 code. Overflow.
-I fixed this by Dim Total_Ticker_Volume As Variant *instead of Double. This may be mac specific issue
+I fixed this by Dim Total_Ticker_Volume As Variant *instead of Double. This may be a mac specific issue.
