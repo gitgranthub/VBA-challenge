@@ -1,4 +1,4 @@
-Attribute VB_Name = "StockAnalysis_mod"
+Attribute VB_Name = "StockAnalysis_module"
   Sub StockAnalysis()
   
   ' Set ws as a worksheet object variable.
@@ -24,9 +24,7 @@ Attribute VB_Name = "StockAnalysis_mod"
         Dim Total_Ticker_Volume As Variant
         Total_Ticker_Volume = 0
         
-        'Set variable for year start and year end price and percentage
-        'YearOver is the ratio that compares the change in the price of an asset,
-        'usually marketable securities, to the corresponding change in the price of its derivative**
+        'variable for year start and year end price and percentage
         
         Dim Open_Price As Double
         Open_Price = 0
@@ -38,8 +36,8 @@ Attribute VB_Name = "StockAnalysis_mod"
         YearOver_Percent = 0
        
          
-        ' Keep track of the location for each ticker name
-        ' in the summary table for the current worksheet
+        'Keep track of the location for each ticker name
+        'in the summary table for the current worksheet
         Dim Summary_Table_Row As Long
         Summary_Table_Row = 2
         
@@ -64,22 +62,22 @@ Attribute VB_Name = "StockAnalysis_mod"
          '***AutoFit G-L Columns on Worksheet, I thought this may be a nice cleanup'
          ws.Range("I1:L1").Columns.AutoFit
        
-         ' Set initial value of Open Price for the first Ticker of ws,
-         ' The rest ticker's open price will be initialized within the for loop below
+         'Set initial value of Open Price for the first Ticker of ws,
+         'The rest ticker's open price will be initialized within the for loop below
          Open_Price = ws.Cells(2, 3).Value
         
-         ' Loop from the beginning of the current worksheet(Row2) till its last row
+         'Loop from the beginning of the current worksheet(Row2) till its last row
          For i = 2 To Lastrow
         
       
-             ' Check if we are still within the same ticker name,
-             ' if not - write results to summary table
+             'Check if we are still within the same ticker name,
+             'if not - write results to summary table
              If ws.Cells(i + 1, 1).Value <> ws.Cells(i, 1).Value Then
             
-                ' Set the ticker name, we are ready to insert this ticker name data
+                'Set the ticker name, we are ready to insert this ticker name data
                 Ticker_Name = ws.Cells(i, 1).Value
                 
-                ' Calculate YearOver_Price and YearOver_Percent
+                'Calculate YearOver_Price and YearOver_Percent
                 Close_Price = ws.Cells(i, 6).Value
                 YearOver_Price = Close_Price - Open_Price
                 ' Check Division by 0 condition
@@ -87,18 +85,18 @@ Attribute VB_Name = "StockAnalysis_mod"
                     YearOver_Percent = (YearOver_Price / Open_Price) * 100
                 Else
                     '**FOUND This warning box ONLINE**' seems worth using if you want to avoid a spreadsheet crash
-                    'MsgBox ("For " & Ticker_Name & ", Row " & CStr(i) & ": Open Price =" & Open_Price & ". Fix <open> field manually and save the spreadsheet.")
+                    'MsgBox ("For " & Ticker_Name & ", Row " & CStr(i) & ": Open Price =" & Open_Price & ". Fix <open> field manually and save the spreadsheet.")ееее    
                 End If
                 
-                ' Add to the Ticker name total volume
+                'Add to the Ticker name total volume
                 Total_Ticker_Volume = Total_Ticker_Volume + ws.Cells(i, 7).Value
               
                 
-                ' Print the Ticker Name in the Summary Table, Column I
+                'Print the Ticker Name in the Summary Table, Column I
                 ws.Range("I" & Summary_Table_Row).Value = Ticker_Name
-                ' Print the Ticker Name in the Summary Table
+                'Print the Ticker Name in the Summary Table
                 ws.Range("J" & Summary_Table_Row).Value = YearOver_Price
-                ' Fill "Yearly Change" Green and Red colors
+                'Fill "Yearly Change" Green and Red colors
                 If (YearOver_Price > 0) Then
                     'Fill column with GREEN color for positive change
                     ws.Range("J" & Summary_Table_Row).Interior.ColorIndex = 4
@@ -107,21 +105,21 @@ Attribute VB_Name = "StockAnalysis_mod"
                     ws.Range("J" & Summary_Table_Row).Interior.ColorIndex = 3
                 End If
                 
-                 ' Print the Ticker Name in the Summary Table, Column I
+                 'Print the Ticker Name in the Summary Table, Column I
                 ws.Range("K" & Summary_Table_Row).Value = (CStr(YearOver_Percent) & "%")
-                ' Print the Ticker Name in the Summary Table, Column J
+                'Print the Ticker Name in the Summary Table, Column J
                 ws.Range("L" & Summary_Table_Row).Value = Total_Ticker_Volume
                 
-                ' Add 1 to the summary table row count
+                'Add 1 to the summary table row count
                 Summary_Table_Row = Summary_Table_Row + 1
-                ' Reset YearOver_rice and YearOver_Percent holders, as we will be working with new Ticker
+                'Reset YearOver_rice and YearOver_Percent holders, as we will be working with new Ticker
                 YearOver_Price = 0
-                ' Hard part,do this in the beginning of the for loop YearOver_Percent = 0
+                'Hard part,do this in the beginning of the for loop YearOver_Percent = 0
                 Close_Price = 0
-                ' Capture next Ticker's Open_Price
+                'Capture next Ticker's Open_Price
                 Open_Price = ws.Cells(i + 1, 3).Value
 
-                 ' Reset the Stock Volume Total
+                 'Reset the Stock Volume Total
                  'Yr_Yr_stock_vol_Total = 0
               
                 
@@ -129,7 +127,7 @@ Attribute VB_Name = "StockAnalysis_mod"
             'Else - If the cell immediately following a row is still the same ticker name,
             'just add to Totl Ticker Volume
             Else
-                ' Encrease the Total Ticker Volume
+                'Encrease the Total Ticker Volume
                 Total_Ticker_Volume = Total_Ticker_Volume + ws.Cells(i, 7).Value
             End If
             
@@ -155,6 +153,7 @@ End Sub
 'while searching for help, I have gone through this code step by step to understand
 'it's actions. This project was tough for me and I couldn't have done it without google-fu and all
 'our in-class activites + office hours....
+
 
 
 
